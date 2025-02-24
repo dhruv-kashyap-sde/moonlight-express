@@ -1,0 +1,206 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --bg: #0a0a0a;
+  --theme: #df8c11;
+  --theme-light: #ffb443;
+  --theme-dark: #d68102;
+  --text: #e8e8e8;
+  --text-g: #3e3e3e;
+  --text-dark: #1d1d1d;
+  --border: 1px solid #3e3e3e;
+  --radius: 10px;
+}
+
+/* Reset and Default Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Raleway", serif;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+/* Paragraphs */
+p {
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+/* Links */
+a {
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+  color: var(--text);
+  transition: 0.3s ease-in-out;
+}
+
+a:hover {
+  color: var(--theme-light);
+  border-bottom: 1px solid var(--theme);
+}
+
+/* Buttons */
+button {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+button.primary {
+  background-color: var(--theme);
+  color: var(--text);
+}
+
+button.primary:hover {
+  background-color: var(--theme-dark);
+  color: var(--text-dark);
+}
+
+button.secondary {
+  border: 1px solid var(--theme);
+  background-color: transparent;
+  color: var(--theme);
+}
+
+button.secondary:hover {
+  background-color: var(--theme);
+  color: var(--text);
+}
+
+/* Forms */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px 15px;
+  border: var(--border);
+  border-radius: var(--radius);
+  font-size: 16px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  resize: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--theme-light);
+  outline: none;
+}
+
+/* Lists */
+ul,
+ol {
+  margin-left: 20px;
+}
+
+ul li,
+ol li {
+  margin-bottom: 5px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Utility Classes */
+.relative{
+  position: relative;
+}
+
+.number{
+  border: 2px solid var(--theme-dark);
+  border-radius: 50%;
+  padding: 20px;
+  line-height: 0.5;
+  background-color: var(--bg);
+  color: var(--text-g);
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.hidden {
+  display: none;
+}
+
+.blur {
+  background: rgba(255, 255, 255, 0.027);
+  /* border-radius: 16px; */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.144);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 14px;
+  }
+}

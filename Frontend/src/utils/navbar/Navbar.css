@@ -1,0 +1,59 @@
+.navbar {
+  padding: 5vh 5vw;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.short-navbar{
+  padding: 2vh 2vw;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 1rem;
+  transition: all 0.3s ease-out;
+  overflow: hidden;
+}
+
+.navbar-item{
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.navbar-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+.navbar-toggle-icon {
+  width: 25px;
+  height: 3px;
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+}
