@@ -1,0 +1,134 @@
+.productpage-container{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 15vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    background-color: var(--text-dark);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: var(--border-t);
+  }
+  
+  .sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 100px;
+    max-height: 150px;
+    margin-bottom: 15px;
+    border: var(--border);
+    border-radius: var(--radius);
+    padding: 10px 15px;
+  }
+  
+  .sidebar img {
+    width: 40%;
+    height: 100px;
+    border-radius: 5px;
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Banner */
+  .banner {
+    display: flex;
+    align-items: center;
+    background-color: var(--text-dark);
+    padding: 20px;
+    border: var(--border-t);
+    border-radius: 10px;
+  }
+
+  .banner h1{
+    color: var(--theme);
+    font-weight: 300;
+    font-size: 3rem;
+    margin-bottom: 0;
+  }
+  
+  /* Product Grid */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .product-card {
+    background: var(--text-dark);
+    border-radius: 10px;
+    border: 1px solid var(--theme-trans);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-card img {
+    width: 100%;
+    height: 200px;
+    border-bottom: var(--border);
+    border-radius: 20px;
+  }
+
+  .product-card-details{
+    padding: 10px;
+    /* min-height: 100px; */
+  }
+  
+  .product-card h3 {
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .product-card .primary{
+    width: 100%;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .productpage-container {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+    }
+  
+    .banner {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .banner-image img {
+      max-width: 100%;
+    }
+  }
+  

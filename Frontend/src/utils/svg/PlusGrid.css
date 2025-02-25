@@ -8,8 +8,6 @@
 }
 .plus-grid {
   display: grid;
-  height: 100px;
-  width: 100px;
   grid-template-columns: 30px 30px 30px;
   grid-template-rows: 30px 30px 30px;
   position: absolute;
@@ -31,7 +29,7 @@
 }
 .plus-icon-2 {
   animation-duration: 5s;
-  animation-delay: 1s;
+  animation-delay: 0.3s;
 }
 .plus-icon-3 {
   animation-duration: 6.5s;
@@ -43,17 +41,17 @@
 }
 .plus-icon-5 {
   animation-duration: 8.5s;
-  animation-delay: 6.5s;
+  animation-delay: 2.5s;
 }
 .plus-icon-6 {
   animation-duration: 7.2s;
-  animation-delay: 6.7s;
+  animation-delay: 1.7s;
 }
 .plus-icon-7 {
   animation-duration: 10.2s;
-  animation-delay: 3.5s;
+  animation-delay: 1.5s;
 }
 .plus-icon-8 {
   animation-duration: 7.2s;
-  animation-delay: 2s;
+  animation-delay: 0.1s;
 }
