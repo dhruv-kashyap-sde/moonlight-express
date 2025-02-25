@@ -33,12 +33,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    min-height: 100px;
-    max-height: 150px;
-    margin-bottom: 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
     border: var(--border);
     border-radius: var(--radius);
     padding: 10px 15px;
+    transition: all 0.2s ease-in;
   }
   
   .sidebar img {
@@ -60,7 +60,7 @@
     display: flex;
     align-items: center;
     background-color: var(--text-dark);
-    padding: 20px;
+    padding: 0 20px;
     border: var(--border-t);
     border-radius: 10px;
   }

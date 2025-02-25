@@ -1,0 +1,44 @@
+.dashboard-container {
+  padding: 2rem;
+  margin-top: 10vh;
+  display: flex;
+  gap: 20px;
+}
+.sidebar-container {
+  min-height: 100vh;
+  min-width: 100px;
+  width: 20%;
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 10px 15px;
+}
+
+.sidebar-container .logo-container {
+  text-align: center;
+}
+
+.sidebar-container .sidebar-buttons button {
+  width: 100%;
+  border: var(--border);
+}
+
+.sidebar-container .sidebar-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* dashboard-body */
+
+.dashboard-body {
+  border: var(--border);
+  border-radius: var(--radius);
+  min-height: 100vh;
+  width: 80%;
+  padding: 10px 15px;
+}
+
+.header-buttons button{
+    margin: 10px 0 ;
+    margin-right: 10px;
+}

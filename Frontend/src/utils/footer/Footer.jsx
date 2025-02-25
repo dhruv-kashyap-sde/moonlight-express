@@ -2,6 +2,7 @@ import React from "react";
 // import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import "./Footer.css";
 import PlusGrid from "../svg/PlusGrid";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -12,25 +13,25 @@ const Footer = () => {
       <div className="footer-content">
         {/* Social Media Icons */}
         <div className="footer-icons">
-          <a href="#" className="icon">icons</a>
-          <a href="#" className="icon">icons</a>
-          <a href="#" className="icon">icons</a>
-          <a href="#" className="icon">icons</a>
+          <Link to="/" className="icon">icons</Link>
+          <Link to="/" className="icon">icons</Link>
+          <Link to="/" className="icon">icons</Link>
+          <Link to="/" className="icon">icons</Link>
         </div>
 
         {/* Navigation Links */}
         <div className="footer-links">
-          <a href="#">Home</a>
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Team</a>
-          <a href="#">Contact</a>
+          <Link to="/">Home</Link>
+          <Link to="/">About</Link>
+          <Link to="/">Services</Link>
+          <Link to="/admin">Admin</Link>
+          <Link to="/">Contact</Link>
         </div>
 
         {/* Copyright Text */}
         <div className="footer-bottom">
         <p className="footer-text">&copy;2025 Moonlight Express | All Rights Reserved</p>
-        <p className="footer-text">Created by - <a href="https://dhruvkashyap.onrender.com" target="_blank">Dhruv</a> <i class="ri-github-fill"></i></p>
+        <p className="footer-text">Created by - <a href="https://dhruvkashyap.onrender.com" target="_blank">Dhruv</a> <a href="https://github.com.dhruv-kashyap-sde/" target="_blank"><i class="ri-github-fill"></i></a></p>
         </div>
       <PlusGrid bottom={"20px"} right={"20px"}/>
       </div>

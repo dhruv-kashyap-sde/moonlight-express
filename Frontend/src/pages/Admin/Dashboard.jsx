@@ -1,7 +1,5 @@
 import React from "react";
-import "./Productpage.css";
-import PlusGrid from "../../utils/svg/PlusGrid";
-import Dot from "../../utils/svg/Dot";
+import "./Dashboard.css";
 
 const products = [
   {
@@ -31,43 +29,31 @@ const products = [
   },
 ];
 
-const categories = [
-  {name:"Metal"},
-  {name:"Glass"},
-  {name:"Resin"},
-  {name:"Wooden"},
-  {name:"Home-Decor"},
-  {name:"Electric"},
-]
-
-const Productpage = () => {
+const Dashboard = () => {
   return (
-    <div className="productpage-container">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <p className="center">Filters</p>
-        <hr />
-        <ul>
-          {categories.map((category, i) => (
-            <li className="secondary" key={i}>
-              {category.name}
-            </li>
-          ))}
-        </ul>
-      </aside>
-
-      {/* Main Content */}
-      <main className="main-content">
-        {/* Banner */}
-        <div className="banner relative">
-            <h1 className="center">Our Products</h1>
+    <div className="dashboard-container">
+      <div className="sidebar-container">
+        <div className="logo-container">
+          <h1 className="color">Admin</h1>
         </div>
-
-        {/* Product Grid */}
+        <hr className="yellow" />
+        <div className="sidebar-buttons">
+          <button className="secondary">All Products</button>
+          <button className="secondary">Inquiries</button>
+        </div>
+      </div>
+      <div className="dashboard-body">
+        <h1 className="color">All Products</h1>
+        <hr />
+        <header className="header-buttons">
+          <button className="secondary">Edit</button>
+          <button className="secondary">Delete</button>
+          <button className="secondary">Create</button>
+        </header>
         <section className="product-grid">
           {products.map((product, i) => (
             <div key={product.id} className="product-card">
-              <img src={product.image+i} alt={product.title} />
+              <img src={product.image + i} alt={product.title} />
               <div className="product-card-details">
                 <h3>{product.title}</h3>
                 <button className="primary">Get Product</button>
@@ -75,9 +61,9 @@ const Productpage = () => {
             </div>
           ))}
         </section>
-      </main>
+      </div>
     </div>
   );
 };
 
-export default Productpage;
+export default Dashboard;
