@@ -39,6 +39,6 @@
 }
 
 .header-buttons button{
-    margin: 10px 0 ;
     margin-right: 10px;
+    margin-bottom: 10px;
 }

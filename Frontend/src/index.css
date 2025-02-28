@@ -2,7 +2,7 @@
 
 :root {
   --bg: #0a0a0a;
-  --theme: #df8c11;
+  --theme: #fca017;
   --theme-trans: #df8d1152;
   --theme-light: #ffb443;
   --theme-dark: #d68102;
@@ -111,6 +111,7 @@ select {
   margin-bottom: 10px;
   background-color: transparent;
   resize: none;
+  color: var(--theme);
 }
 
 input:focus,
@@ -160,6 +161,26 @@ img {
 }
 
 /* Utility Classes */
+
+.fw-100{
+  font-weight: 100;
+}
+
+.fw-200{
+  font-weight: 200;
+}
+
+.fw-300{
+  font-weight: 300;
+}
+
+.fw-400{
+  font-weight: 400;
+}
+
+.fw-500{
+  font-weight: 500;
+}
 
 .color{
   color: var(--theme);
