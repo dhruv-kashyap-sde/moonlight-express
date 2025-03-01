@@ -67,12 +67,17 @@ const Productpage = () => {
         <section className="product-grid">
           {products.map((product, i) => (
             <div key={product.id} className="product-card">
-              <img src={product.image+i} alt={product.title} />
-              <div className="product-card-details">
-                <h3>{product.title}</h3>
-                <button className="primary">Get Product</button>
+            <img src={product.image + i} alt={product.title} />
+            <div className="product-card-details">
+              <h3 className='product-title'>{product.title}</h3>
+              <div className="price-category">
+                <h4 className='fw-500'>₹999</h4>
+                <h4 className='fw-500'>Gold</h4>
               </div>
+              {/* <p className='product-description'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea eaque consequatur cupiditate fugiat libero ad, maiores hic ullam molestias voluptatem quae voluptatibus dignissimos, iure perferendis?</p> */}
+              <button className="primary">Get Product</button>
             </div>
+          </div>
           ))}
         </section>
       </main>

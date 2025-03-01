@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import AllProducts from "./AllProducts";
 import Categories from "./Categories";
 import Inquiries from "./Inquiries";
+import CreateProduct from "./CreateProduct";
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState("AllProducts");
@@ -11,6 +12,8 @@ const Dashboard = () => {
     switch (activeComponent) {
       case "AllProducts":
         return <AllProducts />;
+      case "Create":
+        return <CreateProduct />;
       case "Categories":
         return <Categories />;
       case "Inquiries":
@@ -28,9 +31,10 @@ const Dashboard = () => {
         </div>
         <hr className="yellow" />
         <div className="sidebar-buttons">
-          <button className="secondary" onClick={() => setActiveComponent("AllProducts")}>All Products</button>
-          <button className="secondary" onClick={() => setActiveComponent("Inquiries")}>Inquiries</button>
-          <button className="secondary" onClick={() => setActiveComponent("Categories")}>Categories</button>
+          <button className={`${activeComponent == "AllProducts" && 'active' } secondary`} onClick={() => setActiveComponent("AllProducts")}>All Products</button>
+          <button className={`${activeComponent == "Create" && 'active' } secondary`} onClick={() => setActiveComponent("Create")}>Create Product</button>
+          <button className={`${activeComponent == "Inquiries" && 'active' } secondary`} onClick={() => setActiveComponent("Inquiries")}>Inquiries</button>
+          <button className={`${activeComponent == "Categories" && 'active' } secondary`} onClick={() => setActiveComponent("Categories")}>Categories</button>
         </div>
       </div>
       <>

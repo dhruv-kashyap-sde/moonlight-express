@@ -7,6 +7,7 @@
   --theme-light: #ffb443;
   --theme-dark: #d68102;
   --text: #e8e8e8;
+  --text-secondary: #b6b6b6;
   --text-g: #3e3e3e;
   --text-dark: #1d1d1d;
   --border: 1px solid #3e3e3e;
@@ -23,8 +24,8 @@
 }
 
 *::selection{
-  background-color: var(--bg);
-  color: var(--theme);
+  background-color: var(--theme);
+  color: var(--bg);
 }
 
 body {
@@ -78,25 +79,25 @@ button {
   transition: all 0.3s ease-in-out;
 }
 
-button.primary {
+.primary {
   background-color: var(--theme);
-  color: var(--text);
+  color: var(--bg);
 }
 
-button.primary:hover {
+.primary:hover {
   background-color: var(--theme-dark);
   color: var(--text-dark);
 }
 
-button.secondary, li.secondary {
+.secondary, li.secondary {
   border: 1px solid var(--theme-trans);
   background-color: transparent;
   color: var(--theme);
 }
 
-button.secondary:hover,  li.secondary:hover {
+.secondary:hover,  li.secondary:hover {
   background-color: var(--theme);
-  color: var(--text);
+  color: var(--bg);
 }
 
 /* Forms */
@@ -182,6 +183,22 @@ img {
   font-weight: 500;
 }
 
+.mt-10{
+  margin-top: 10px;
+}
+
+.mb-10{
+  margin-bottom: 10px;
+}
+
+.mr-10{
+  margin-right: 10px;
+}
+
+.ml-10{
+  margin-left: 10px;
+}
+
 .color{
   color: var(--theme);
 }
@@ -213,6 +230,11 @@ img {
 
 .hidden {
   display: none;
+}
+
+button.active{
+  background-color: var(--theme);
+  color: var(--bg);
 }
 
 .blur {
