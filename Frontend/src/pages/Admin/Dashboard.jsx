@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Dashboard.css";
 import AllProducts from "./AllProducts";
 import Categories from "./Categories";
 import Inquiries from "./Inquiries";
 import CreateProduct from "./CreateProduct";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState("AllProducts");
+
+  const navigate = useNavigate();
 
   const renderComponent = () => {
     switch (activeComponent) {

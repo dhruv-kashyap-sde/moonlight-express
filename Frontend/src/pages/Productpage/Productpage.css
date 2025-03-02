@@ -120,6 +120,7 @@
   }
 
   .product-card-details .product-description{
+    min-height: 8ch;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     line-clamp: 3;

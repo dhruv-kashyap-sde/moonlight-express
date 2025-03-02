@@ -1,48 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Loginpage.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Loginpage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [ loading, setLoading ] = useState(false);
+  const URL = import.meta.env.VITE_API_URL;
+  
+  const login = async (email, password) => {
+    try {
+      setLoading(true);
+      let response = await axios.post(`${URL}/admin/login`, { email, password }   
+      );
+      console.log(response);
+      
+      if(response.data.success){ 
+        localStorage.setItem("token", response.data.token);
+        navigate("/admin");
+        toast.success("Login successful")
+      }
+    } catch (error) {
+      console.error("Login failed:", error.response.data.message);
+      toast.error(`Login failed: ${error.response.data.message}`);
+    } finally{
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/admin`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      );
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
-      if (data.role === "admin") {
-        navigate("/admin");
-        toast.success("Login Successful");
-      } else {
-        toast.error("Invalid Credentials");
-        navigate("/login");
-      }
-      console.log(data);
-    } catch (error) {
-      toast.error("Invalid Credentials");
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    await login(email, password);
   };
 
   return (
