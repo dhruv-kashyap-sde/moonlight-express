@@ -232,7 +232,7 @@ img {
   display: none;
 }
 
-button.active{
+.active{
   background-color: var(--theme);
   color: var(--bg);
 }

@@ -8,7 +8,7 @@ const PaginationButtons = ({ totalProducts, productPerPage, currentPage, onPageC
                 <button
                     key={i}
                     onClick={() => onPageChange(i)}
-                    className={` basic-button ${i === currentPage ? 'active' : ''}`}
+                    className={` secondary ${i === currentPage ? 'active' : ''}`}
                 >
                     {i}
                 </button>
