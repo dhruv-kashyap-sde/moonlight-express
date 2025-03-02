@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Loaders from "../../utils/Loader/Loaders";
+import toast from "react-hot-toast";
 
 const Categories = () => {
     
@@ -43,7 +46,8 @@ const Categories = () => {
     setCategoryName(e.target.value);
   };
 
-  const createCategories = async () => {
+  const createCategories = async (e) => {
+    e.preventDefault();
     const category = { name: categoryName };
     if (!categoryName.trim()) {
       toast.error("Category name is required");
@@ -72,9 +76,9 @@ const Categories = () => {
     }
   };
 
-//   useEffect(() => {
-//     getCategories();
-//   }, []);
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <div className="dashboard-body">
@@ -83,7 +87,7 @@ const Categories = () => {
       <>
       <div className="categories-container">
         <div className="category-body">
-          <div className="create-category">
+          <form onSubmit={createCategories} className="create-category">
             <h3 className="fw-300">Create a Category</h3>
             <input
               value={categoryName}
@@ -92,10 +96,10 @@ const Categories = () => {
               type="text"
               placeholder="Category Name"
             />
-            <button disabled={creatingCategories} onClick={createCategories} className="primary">
+            <button disabled={creatingCategories} className="primary">
               {creatingCategories? " Creating":"Create"}
             </button>
-          </div>
+          </form>
           <div className="all-categories">
             <div className="category-header">
               <span>

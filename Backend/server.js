@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-// const categoryRoutes = require('./Routes/categoryRoutes');
-// const productRoutes = require('./Routes/productRoutes');
+const categoryRoutes = require('./routes/category.route');
+const productRoutes = require('./routes/product.route');
 const adminRoutes = require('./routes/admin.route');
 // const inquiryRoutes = require('./Routes/inquiryRoutes');
 const cors = require('cors');
@@ -28,8 +28,8 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
-// app.use('/api', categoryRoutes);
-// app.use('/api', productRoutes);
+app.use('/api', categoryRoutes);
+app.use('/api', productRoutes);
 app.use('/api', adminRoutes);
 // app.use('/api', inquiryRoutes);
 
