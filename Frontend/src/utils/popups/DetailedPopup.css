@@ -97,9 +97,6 @@
     border-radius: 4px;
     font-size: 14px;
     resize: none;
-    /* white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; */
   }
   
   .detailed-popup-container .basic-button {

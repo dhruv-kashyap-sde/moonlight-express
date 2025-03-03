@@ -8,6 +8,7 @@ import Dashboard from "./pages/Admin/Dashboard";
 import Loginpage from "./pages/Login/LoginPage";
 import PrivateRoute from "./utils/private/PrivateRoute";
 import { Toaster } from "react-hot-toast";
+import SingleProduct from "./pages/Productpage/SingleProduct";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/products" element={<Productpage />} />
+          <Route path='/products/:id' element={<SingleProduct/>} />
           <Route path="/admin" element={<PrivateRoute />} >
             <Route path="" element={<Dashboard/>} />
           </Route>

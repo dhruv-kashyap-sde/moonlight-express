@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./SingleProduct.css";
 import axios from "axios";
-import QuotationPopup from "../../../utils/Popups/QuotationPopup";
+import QuotationPopup from "../../utils/popups/QuotationPopup";
+import Dot from "../../utils/svg/Dot";
+import PlusGrid from "../../utils/svg/PlusGrid";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -34,35 +36,37 @@ const SingleProduct = () => {
   if (!product) {
     return <p>Loading...</p>;
   }
-  
 
   return (
     <>
-      <div className="curved-banner scroll-container">OUR PRODUCTS</div>
-        <div className="product-page">
-            <div className="product-left">
-                <img
-                    src={`${product.images[0]}`} 
-                    alt={product.name}
-                    className="product-image"
-                />
-            </div>
-            <div className="product-right">
-                <h1 className="product-name">
-                    {product.name}
-                </h1>
-                <hr />
-                <h2>$ {product.price}</h2>
-                <h2 className="product-category">Category: Home Decor</h2>
-                <p className="product-description italic-text">
-                    {product.description}
-                </p>
-                <button className="basic-button" onClick={handleOpenPopup}>
-                    Get Quotation <i class="ri-mail-line"></i>
-                </button>
-            </div>
+      <div className="product-page-header color relative">
+        <Dot left={"-10px"} />
+        <h1 className="product-name fw-400 color">{product.name}</h1>
+      </div>
+      <hr />
+      <div className="product-page">
+        <div className="product-left">
+          <img
+            src={`${product.images[0]}`}
+            alt={product.name}
+            className="product-image"
+          />
         </div>
-        {isPopupVisible && <QuotationPopup product={product} onClose={handleClosePopup} />}
+        <div className="product-right relative">
+          <h2>₹ {product.price}</h2>
+          <h2 className="product-category">Category: {product.category.name}</h2>
+          <p className="product-description italic-text">
+            {product.description}
+          </p>
+          <button className="primary" onClick={handleOpenPopup}>
+            Get Quotation <i class="ri-mail-line"></i>
+          </button>
+          <PlusGrid right={"0"} top={"0"} />
+        </div>
+      </div>
+      {isPopupVisible && (
+        <QuotationPopup product={product} onClose={handleClosePopup} />
+      )}
     </>
   );
 };
