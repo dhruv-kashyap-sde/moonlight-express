@@ -16,12 +16,12 @@
   justify-content: end;
   padding: 0 10%;
 }
-.image-container {
+.herosection-container .image-container {
   position: relative;
   width: 100%;
 }
 
-.image-container img {
+.herosection-container .image-container img {
   height: 100vh;
   width: 100%;
   object-fit: cover;

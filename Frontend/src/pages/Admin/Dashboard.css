@@ -111,3 +111,7 @@
 .modal-content button {
   margin-right: 10px;
 }
+
+.editable-input{
+  min-height: 150px;
+}
