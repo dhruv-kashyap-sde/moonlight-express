@@ -40,8 +40,8 @@ exports.login = async (req, res) => {
 
   try {
     let admin = await Admin.findOne({ email });
-    if(!admin) return res.status(401).json({ message: "Invalid credentials" });
-    
+    if (!admin) return res.status(401).json({ message: "Invalid credentials" });
+
     if (email !== admin.email)
       return res.status(401).json({ message: "Invalid credentials" });
 
@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
     res.json({
       message: "Login successful",
       success: true,
-      token
+      token,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -65,8 +65,13 @@ exports.logout = (req, res) => {
   res.clearCookie("token").json({ message: "Logged out" });
 };
 
-exports.dashboard = (req, res) => {
-  res.json({ message: "Welcome to Admin Dashboard" });
+exports.dashboard = async (req, res) => {
+  let { email } = req.user;
+  let admin = await Admin.findOne({ email });
+
+  if (!admin) return res.status(401).json({ message: "User not found" });
+
+  res.json({ message: "Welcome to Admin Dashboard", success: true });
 };
 
 // exports.createAdmin = async (req, res) => {

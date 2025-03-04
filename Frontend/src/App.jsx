@@ -6,9 +6,9 @@ import Footer from "./utils/footer/Footer";
 import Productpage from "./pages/Productpage/Productpage";
 import Dashboard from "./pages/Admin/Dashboard";
 import Loginpage from "./pages/Login/LoginPage";
-import PrivateRoute from "./utils/private/PrivateRoute";
 import { Toaster } from "react-hot-toast";
 import SingleProduct from "./pages/Productpage/SingleProduct";
+import Private from "./utils/private/Private";
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
           <Route path="/" element={<Homepage />} />
           <Route path="/products" element={<Productpage />} />
           <Route path='/products/:id' element={<SingleProduct/>} />
-          <Route path="/admin" element={<PrivateRoute />} >
+          <Route path="/admin" element={<Private />} >
             <Route path="" element={<Dashboard/>} />
           </Route>
           <Route path="/login" element={<Loginpage />} />
