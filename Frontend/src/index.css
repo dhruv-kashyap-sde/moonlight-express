@@ -78,6 +78,16 @@ button {
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
 }
+button:disabled{
+  background-color: var(--text-g);
+  color: var(--bg);
+  cursor: not-allowed;
+}
+button:disabled:hover{
+  background-color: var(--text-g);
+  color: var(--bg);
+  cursor: not-allowed;
+}
 
 .primary {
   background-color: var(--theme);

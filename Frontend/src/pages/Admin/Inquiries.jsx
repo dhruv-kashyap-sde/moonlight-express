@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import "./Inquiry.css";
 import DetailedPopup from "../../utils/popups/DetailedPopup";
 import axios from "axios";
+import Loaders from "../../utils/Loader/Loaders";
 
 const Inquiry = () => {
   const URL = import.meta.env.VITE_API_URL;
@@ -15,7 +16,6 @@ const Inquiry = () => {
         const response = await axios.get(`${URL}/inquiries`);
         setInquiries(response.data);
         console.log(response.data);
-        
       } catch (error) {
         console.error("Error fetching inquiries", error);
       }
@@ -48,22 +48,24 @@ const Inquiry = () => {
               </tr>
             </thead>
             <tbody>
-              {inquiries.length !== 0 
-                && inquiries.map((item) => (
-                <tr onClick={() => open(item)} key={item._id}>
-                  <td className="italic-text">{item.date}</td>
-                  <td className="italic-text">{item.name}</td>
-                  <td className="italic-text">{item.email}</td>
-                  <td className="italic-text">{item.phone}</td>
-                  <td className="italic-text">{item.message}</td>
-                  <td className="italic-text">{item.product?.name ?? "[Deleted Product]"}</td>
-                </tr>
+              {inquiries.length !== 0 &&
+                inquiries.map((item) => (
+                  <tr onClick={() => open(item)} key={item._id}>
+                    <td className="italic-text">{item.date}</td>
+                    <td className="italic-text">{item.name}</td>
+                    <td className="italic-text">{item.email}</td>
+                    <td className="italic-text">{item.phone}</td>
+                    <td className="italic-text">{item.message}</td>
+                    <td className="italic-text">
+                      {item.product?.name ?? "[Deleted Product]"}
+                    </td>
+                  </tr>
                 ))}
             </tbody>
           </table>
+          {inquiries.length === 0 && <Loaders />}
         </div>
       </div>
-      {inquiries.length === 0 && <div className="no-response-text secondary-text">No Inquiries yet</div>}
       {visible && <DetailedPopup inquiry={selectedInquiry} close={close} />}
     </>
   );

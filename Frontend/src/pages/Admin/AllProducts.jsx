@@ -56,26 +56,41 @@ import { ProductContext } from "../../context/ProductContext";
 // ];
 
 const AllProducts = () => {
-  const { allProducts, setAllProducts, setCategories } =
+  const { categories, allProducts, setAllProducts, setCategories } =
   useContext(ProductContext);
 
   const [products, setProducts] = useState(allProducts);
-  const [editingProduct, setEditingProduct] = useState(null);
-  const [newProductTitle, setNewProductTitle] = useState("");
-  const [newProductDescription, setNewProductDescription] = useState("");
-  const [newProductPrice, setNewProductPrice] = useState("");
-  const [newProductCategory, setNewProductCategory] = useState("");
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deletingProduct, setDeletingProduct] = useState(null);
+  const [updating, setUpdating] = useState(false);
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+    images: [],
+  });
 
   const handleEdit = (product) => {
     console.log(product);
-    
-    setEditingProduct(product);
-    setNewProductTitle(product.name);
-    setNewProductDescription(product.description);
-    setNewProductPrice(product.price);
-    setNewProductCategory(product.category.name);
+    setSelectedProduct(product);
+    setFormData({
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      category: product.category._id,
+      images: product.images,
+    });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const openDeletePopup = (productId) => {
@@ -89,22 +104,26 @@ const AllProducts = () => {
     setDeletingProduct(null)
   };
 
-  const handleSave = () => {
-    setProducts(products.map(product => 
-      product.id === editingProduct.id ? { 
-        ...product, 
-        name: newProductTitle, 
-        description: newProductDescription,
-        price: newProductPrice,
-        category: newProductCategory
-      } : product
-    ));
-    setEditingProduct(null);
-    setNewProductTitle("");
-    setNewProductDescription("");
-    setNewProductPrice("");
-    setNewProductCategory("");
-    toast.success("Added Successfully");
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      setUpdating(true);
+      const response = await axios.put(
+        `${URL}/products/${selectedProduct._id}`,
+        formData
+      );
+      console.log("Product updated:", response.data);
+      toast.success("Product updated successfully");
+      setSelectedProduct(null);
+      // Optionally refresh the product list or notify the user
+    } catch (error) {
+      console.error("Error updating product", error);
+      toast.error("Error updating product");
+    } finally {
+      setUpdating(false);
+      let response = await axios.get(`${URL}/get-all-products`);
+      setAllProducts(response.data);
+    }
   };
 
 const [loading, setLoading] = useState(false);
@@ -156,36 +175,50 @@ const URL = import.meta.env.VITE_API_URL;
       </section>
       
       {/* edit product */}
-      {editingProduct && (
+      {selectedProduct && (
         <div className="modal blur">
           <form onSubmit={handleSave} className="modal-content">
             <h2>Edit Product</h2>
             <input 
               type="text" 
-              value={newProductTitle} 
-              onChange={(e) => setNewProductTitle(e.target.value)} 
+              name="name"
+              value={formData.name} 
+              onChange={handleInputChange} 
+              required
               placeholder="Product Title" 
             />
             <textarea 
-              value={newProductDescription} 
-              onChange={(e) => setNewProductDescription(e.target.value)} 
+              value={formData.description} 
+              onChange={handleInputChange}
+              name="description"
+              required
               placeholder="Product Description" 
               className="editable-input"
             />
             <input 
               type="number" 
-              value={newProductPrice} 
-              onChange={(e) => setNewProductPrice(e.target.value)} 
+              value={formData.price} 
+              name="price"
+              onChange={handleInputChange} 
+              required
               placeholder="Product Price" 
             />
-            <input 
-              type="text" 
-              value={newProductCategory} 
-              onChange={(e) => setNewProductCategory(e.target.value)} 
-              placeholder="Product Category" 
-            />
-            <button className="primary" type="submit">Save</button>
-            <button className="secondary" onClick={() => setEditingProduct(null)}>Cancel</button>
+             <select
+              name="category"
+              value={formData.category}
+              onChange={handleInputChange}
+              required
+            >
+              {categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+            <button className="primary" disabled={updating} type="submit">
+              {updating ? "Updating..." : "Update Product"}
+            </button>
+            <button className="secondary" onClick={() => setSelectedProduct(null)}>Cancel</button>
           </form>
         </div>
       )}

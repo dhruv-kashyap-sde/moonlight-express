@@ -146,7 +146,7 @@ const CreateProduct = () => {
                 </option>
               ))}
             </select>
-            <button disabled={loading} type="submit" className="primary">
+            <button className="primary" disabled={loading} type="submit">
               {loading ? "Adding Product..." : "Add Product"}
             </button>
           </form>

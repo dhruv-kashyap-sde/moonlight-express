@@ -4,6 +4,7 @@
     overflow-x: auto; /* Enables horizontal scroll for small screens */
     margin: 20px auto;
     margin-bottom: 0;
+    scrollbar-width: none;
   }
   
   /* Table styling */

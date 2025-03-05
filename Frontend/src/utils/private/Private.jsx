@@ -9,9 +9,11 @@ const Private = () => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+    const URL = import.meta.env.VITE_API_URL;
+
     const requestAccess = async () => {
       try {
-        const response = await axios.post("http://localhost:5000/api/admin/dashboard", { token });
+        const response = await axios.post(`${URL}/admin/dashboard`, { token });
         console.log(response.data);
 
         if (response.data.success) {
