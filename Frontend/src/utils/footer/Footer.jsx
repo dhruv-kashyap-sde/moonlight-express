@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import "./Footer.css";
 import PlusGrid from "../svg/PlusGrid";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWidth = () => {
+      setInnerWidth(window.innerWidth);
+      console.log(innerWidth);
+    };
+  window.addEventListener("DOMContentLoaded",handleWidth);
+    
+  return () => window.removeEventListener("DOMContentLoaded", handleWidth);
+  
+  }, [window.innerWidth])
+  
   return (
     <div className="footer-container blur relative">
       <h1>MoonLight Express</h1>
       <PlusGrid top={"20px"} left={"20px"}/>
       {/* Footer Content */}
-      <div className="footer-content">
+      <div className="footer-content relative">
         {/* Social Media Icons */}
         <div className="footer-icons">
           <Link to="/" className="icon">icons</Link>
@@ -33,7 +45,7 @@ const Footer = () => {
         <p className="footer-text">&copy;2025 Moonlight Express | All Rights Reserved</p>
         <p className="footer-text">Created by - <a href="https://dhruvkashyap.onrender.com" target="_blank">Dhruv</a> <a href="https://github.com.dhruv-kashyap-sde/" target="_blank"><i class="ri-github-fill"></i></a></p>
         </div>
-      <PlusGrid bottom={"20px"} right={"20px"}/>
+      {innerWidth < 600 ? "" : <PlusGrid w={"auto"}  bottom={"20px"} right={"0px"}/>}
       </div>
     </div>
   );

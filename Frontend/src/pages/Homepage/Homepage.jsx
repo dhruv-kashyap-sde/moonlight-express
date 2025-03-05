@@ -17,7 +17,7 @@ const Homepage = () => {
             />
             <div className="overlay">
               <div className="herosection-content">
-                <h1 className="herosection-title">SITE TITLE</h1>
+                <h1 className="herosection-title">Moonlight Express</h1>
                 <p>Lorem ipsum dolor sit amet consectetur.</p>
                 <button className="primary">Explore Now</button>
               </div>
@@ -133,7 +133,7 @@ const HowToBuy = () => {
       <div className="steps-body">
         <div className="step">
           <p>
-            <Number number={1} size={"2rem"} top={"-30px"} left={"-30px"}/>
+            <Number number={1}/>
             <i class="action-icon ri-file-search-line"></i>
             Browse the Desired product from our vast range of collection.
           </p>
@@ -141,7 +141,7 @@ const HowToBuy = () => {
         </div>
         <div className="step">
           <p>
-            <Number number={2} size={"2rem"} top={"-30px"} left={"-30px"}/>
+            <Number number={2}/>
           <i class="action-icon ri-file-edit-line"></i>
             Fill out neccessary details in the form and get verifried.
           </p>
@@ -149,7 +149,7 @@ const HowToBuy = () => {
         </div>
         <div className="step">
           <p>
-            <Number number={3} size={"2rem"} top={"-30px"} left={"-30px"}/>
+            <Number number={3}/>
             <i class="action-icon ri-truck-line"></i>
             Get your product delivered to your destination.
           </p>

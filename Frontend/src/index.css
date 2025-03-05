@@ -224,6 +224,9 @@ img {
   line-height: 0.5;
   background-color: var(--bg);
   color: var(--text-g);
+  font-size: 2rem;
+  top: -30px;
+  left: -30px;
 }
 
 .center {
@@ -276,5 +279,11 @@ hr{
   textarea,
   select {
     font-size: 14px;
+  }
+
+  .number{
+    font-size: 1rem;
+    top: -20px;
+    left: -20px;
   }
 }

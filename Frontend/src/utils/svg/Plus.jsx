@@ -1,4 +1,5 @@
 import React from 'react'
+import './PlusGrid.css'
 
 const Plus = ({index}) => {
   return (

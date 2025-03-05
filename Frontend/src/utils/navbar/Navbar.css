@@ -46,11 +46,28 @@
   margin: 5px 0;
 }
 
+.hamburger-menu{
+  /* display: none; */
+  height: 0;
+  transition: height 0.3s ease-in-out;
+}
+
 @media (max-width: 450px) {
   .navbar-menu {
-    display: flex;
+    display: none;
     flex-direction: column;
     width: 100%;
+  }
+
+  .hamburger-menu{
+    height: fit-content;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .hamburger-menu a{
+    margin: 5px 0;
   }
 
   .navbar-toggle {

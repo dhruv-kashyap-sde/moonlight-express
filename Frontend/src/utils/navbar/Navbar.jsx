@@ -29,9 +29,15 @@ const Navbar = () => {
           <Link to="/products" className="navbar-item">Products</Link>
         </div>
         <div className="navbar-toggle" onClick={() => setIsOpen(!isOpen)}>
-          <span className="navbar-toggle-icon"><Plus/></span>
+          <span className="navbar-toggle-icon"><i class="ri-menu-line"></i></span>
         </div>
       </div>
+        <div className={`hidden ${isOpen && 'hamburger-menu '} ${!scrolled && "blur"}`}>
+          <Link to="/" className="navbar-item">Home</Link>
+          <Link to="/about" className="navbar-item">About</Link>
+          <Link to="/contact" className="navbar-item">Contact</Link>
+          <Link to="/products" className="navbar-item">Products</Link>
+        </div>
     </nav>
   );
 }
