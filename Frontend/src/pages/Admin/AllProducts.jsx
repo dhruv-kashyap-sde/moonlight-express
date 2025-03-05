@@ -57,9 +57,9 @@ import { ProductContext } from "../../context/ProductContext";
 
 const AllProducts = () => {
   const { categories, allProducts, setAllProducts, setCategories } =
-  useContext(ProductContext);
+    useContext(ProductContext);
+  const URL = import.meta.env.VITE_API_URL;
 
-  const [products, setProducts] = useState(allProducts);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deletingProduct, setDeletingProduct] = useState(null);
   const [updating, setUpdating] = useState(false);
@@ -94,18 +94,35 @@ const AllProducts = () => {
   };
 
   const openDeletePopup = (productId) => {
+    console.log(productId);
+    
     setConfirmDelete(true);
     setDeletingProduct(productId);
-  }
+  };
 
-  const handleDelete = (productId) => {
-    setProducts(products.filter(product => product.id !== productId));
-    setConfirmDelete(false);
-    setDeletingProduct(null)
+  const handleDelete = async (productId) => {
+    console.log(productId);
+    
+    try {
+      await axios.delete(`${URL}/products/${productId}`);
+      setAllProducts(
+        allProducts.filter((product) => product._id !== productId)
+      );
+      setConfirmDelete(false);
+      setDeletingProduct(null);
+      toast.success("Products deleted successfully");
+    } catch (error) {
+      console.error("Error deleting products", error);
+      toast.error("Error deleting products");
+    }
   };
 
   const handleSave = async (e) => {
     e.preventDefault();
+    if (!formData.name || !formData.description || !formData.price || !formData.category || formData.images.length === 0) {
+      toast.error("Please fill in all fields");
+      return;
+    }
     try {
       setUpdating(true);
       const response = await axios.put(
@@ -126,29 +143,28 @@ const AllProducts = () => {
     }
   };
 
-const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-useEffect(() => {
-  const fetchProductsAndCategories = async () => {
-    try {
-      setLoading(true);
-      const [productsResponse, categoriesResponse] = await Promise.all([
-        axios.get(`${URL}/get-all-products`),
-        axios.get(`${URL}/categories`),
-      ]);
-      setAllProducts(productsResponse.data);
-      setCategories(categoriesResponse.data);
-    } catch (error) {
-      console.error("Error fetching data", error);
-      toast.error(`Error fetching data: ${error}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchProductsAndCategories();
-}, []);
+  useEffect(() => {
+    const fetchProductsAndCategories = async () => {
+      try {
+        setLoading(true);
+        const [productsResponse, categoriesResponse] = await Promise.all([
+          axios.get(`${URL}/get-all-products`),
+          axios.get(`${URL}/categories`),
+        ]);
+        setAllProducts(productsResponse.data);
+        setCategories(categoriesResponse.data);
+      } catch (error) {
+        console.error("Error fetching data", error);
+        toast.error(`Error fetching data: ${error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProductsAndCategories();
+  }, []);
 
-const URL = import.meta.env.VITE_API_URL;
 
   return (
     <div className="dashboard-body">
@@ -157,53 +173,61 @@ const URL = import.meta.env.VITE_API_URL;
       <section className="product-grid">
         {allProducts.map((product, i) => (
           <div key={product._id} className="product-card">
-          <img src={product.images[0]} alt={product.name} />
-          <div className="product-card-details">
-            <h3 className="product-title">{product.name}</h3>
-            <div className="price-category">
-              <h4 className="fw-500">₹{product.price}</h4>
-              <h4 className="fw-500">{product.category.name}</h4>
-            </div>
-            {/* <p className='product-description'>{product.description}</p> */}
-            <div className="button-container mt-10">
-                <button className="primary" onClick={() => handleEdit(product)}>Edit</button>
-                <button style={{ width: "30%" }} className="secondary" onClick={() => openDeletePopup(product.id)}>Delete</button>
+            <img src={product.images[0]} alt={product.name} />
+            <div className="product-card-details">
+              <h3 className="product-title">{product.name}</h3>
+              <div className="price-category">
+                <h4 className="fw-500">₹{product.price}</h4>
+                <h4 className="fw-500">{product.category.name}</h4>
               </div>
+              {/* <p className='product-description'>{product.description}</p> */}
+              <div className="button-container mt-10">
+                <button className="primary" onClick={() => handleEdit(product)}>
+                  Edit
+                </button>
+                <button
+                  style={{ width: "30%" }}
+                  className="secondary"
+                  onClick={() => openDeletePopup(product._id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
         ))}
       </section>
-      
+
       {/* edit product */}
       {selectedProduct && (
         <div className="modal blur">
           <form onSubmit={handleSave} className="modal-content">
             <h2>Edit Product</h2>
-            <input 
-              type="text" 
+            <input
+              type="text"
               name="name"
-              value={formData.name} 
-              onChange={handleInputChange} 
+              value={formData.name}
+              onChange={handleInputChange}
               required
-              placeholder="Product Title" 
+              placeholder="Product Title"
             />
-            <textarea 
-              value={formData.description} 
+            <textarea
+              value={formData.description}
               onChange={handleInputChange}
               name="description"
               required
-              placeholder="Product Description" 
+              placeholder="Product Description"
               className="editable-input"
             />
-            <input 
-              type="number" 
-              value={formData.price} 
+            <input
+              type="number"
+              value={formData.price}
               name="price"
-              onChange={handleInputChange} 
+              onChange={handleInputChange}
               required
-              placeholder="Product Price" 
+              placeholder="Product Price"
             />
-             <select
+            <select
               name="category"
               value={formData.category}
               onChange={handleInputChange}
@@ -218,23 +242,36 @@ const URL = import.meta.env.VITE_API_URL;
             <button className="primary" disabled={updating} type="submit">
               {updating ? "Updating..." : "Update Product"}
             </button>
-            <button className="secondary" onClick={() => setSelectedProduct(null)}>Cancel</button>
+            <button
+              className="secondary"
+              onClick={() => setSelectedProduct(null)}
+            >
+              Cancel
+            </button>
           </form>
         </div>
       )}
 
       {/* confirm Delete */}
-      {
-        confirmDelete && (
-          <div className="modal">
-            <div className="modal-content">
-              <h1>Confirm Deleting the product?</h1>
-              <button onClick={() => handleDelete(deletingProduct)} className="primary">Yes</button>
-              <button onClick={() => setConfirmDelete(false)} className="secondary">No</button>
-            </div>
+      {confirmDelete && (
+        <div className="modal">
+          <div className="modal-content">
+            <h1>Confirm Deleting the product?</h1>
+            <button
+              onClick={() => handleDelete(deletingProduct)}
+              className="primary"
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => setConfirmDelete(false)}
+              className="secondary"
+            >
+              No
+            </button>
           </div>
-        )
-      }
+        </div>
+      )}
     </div>
   );
 };

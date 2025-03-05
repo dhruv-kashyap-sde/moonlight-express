@@ -98,17 +98,20 @@ exports.deleteProduct = async (req, res) => {
 
     // Extract the relative path from the full URL
     const imageUrl = product.images[0];
-    const imagePath = imageUrl.replace(/^http:\/\/.*:\d+\//, '');
+    if(imageUrl){
+      const imagePath = imageUrl.replace(/^http:\/\/.*:\d+\//, '');
 
+      // Remove the image file from the uploads folder
+      fs.unlink(imagePath, (err) => {
+        if (err) {
+          console.error('Error deleting image file:', err);
+        }
+      });
+
+    }
+    
     // Delete the product from the database
     await Product.findByIdAndDelete(id);
-
-    // Remove the image file from the uploads folder
-    fs.unlink(imagePath, (err) => {
-      if (err) {
-        console.error('Error deleting image file:', err);
-      }
-    });
 
     res.status(200).json({ message: 'Product and image deleted successfully' });
   } catch (error) {
