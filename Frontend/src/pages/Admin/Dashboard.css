@@ -28,6 +28,15 @@
   gap: 10px;
 }
 
+.sidebar-container .logout-button{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 90%;
+}
+.logout-button .secondary{
+  width: 100%;
+}
 /* dashboard-body */
 
 .dashboard-body {

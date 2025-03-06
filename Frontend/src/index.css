@@ -259,6 +259,10 @@ img {
   border: 1px solid rgba(255, 255, 255, 0.144);
 }
 
+.absolute{
+  position: absolute;
+}
+
 hr{
   border: var(--border);
   background: transparent;
