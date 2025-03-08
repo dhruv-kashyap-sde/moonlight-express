@@ -215,6 +215,10 @@
   .product-card-mobile{
     display: none;
   }
+
+  .sorting-filter{
+    display: none;
+  }
   @media (max-width: 768px) {
     .product-card {
       display: none;
@@ -223,11 +227,7 @@
     .product-card-mobile {
       display: flex;
     }
-  }
-  
 
-  /* Responsive Design */
-  @media (max-width: 768px) {
     .productpage-container {
       flex-direction: column;
     }
@@ -238,6 +238,12 @@
   
     .banner h1{
       font-size:  2rem;
+      width: 100%;
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .banner{
       flex-direction: column;
       text-align: center;
     }
@@ -246,5 +252,17 @@
       max-width: 100%;
     }
     
+    .productpage-container{
+      margin-top: 10vh;
+    }
+
+    .sidebar{
+      display: none;
+    }
+
+    
+  .sorting-filter{
+    display: block;
+  }
   }
   

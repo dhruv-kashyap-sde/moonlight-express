@@ -262,9 +262,29 @@ const Productpage = () => {
       <main className="main-content">
         {/* Banner */}
         <div className="banner relative">
-          <h1 className="center">Our Products</h1>
+          <h1 className="center">Our Products </h1>
         </div>
-
+          <div className="sorting-filter">
+          <select onChange={(e) => {
+            const selectedCategory = categories.find(category => category.name === e.target.value);
+            selectedCategory ? handleCategoryClick(selectedCategory) : defaultSorting();
+          }}>
+          <option className="secondary" value="">Sort by All Products</option>
+          {!loading ? (
+            categories.length !== 0 ? (
+              categories.map((category, i) => (
+                <option value={category.name} className={`${activeCategory === category ? "primary" : "secondary"} `} key={i}>
+                  Sort by {category.name}
+                </option>
+              ))
+            ) : (
+              <p>No categories Available</p>
+            )
+          ) : (
+            <Loaders />
+          )}
+        </select>
+          </div>
         {/* Product Grid */}
         <section className="product-grid">
         {!loading ? (
