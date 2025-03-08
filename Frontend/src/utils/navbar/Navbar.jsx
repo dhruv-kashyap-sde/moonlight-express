@@ -33,10 +33,10 @@ const Navbar = () => {
         </div>
       </div>
         <div className={`hidden ${isOpen && 'hamburger-menu '} ${!scrolled && "blur"}`}>
-          <Link to="/" className="navbar-item">Home</Link>
-          <Link to="/about" className="navbar-item">About</Link>
-          <Link to="/contact" className="navbar-item">Contact</Link>
-          <Link to="/products" className="navbar-item">Products</Link>
+          <Link onClick={() => setIsOpen(false)} to="/" className="navbar-item">Home</Link>
+          <Link onClick={() => setIsOpen(false)} to="/about" className="navbar-item">About</Link>
+          <Link onClick={() => setIsOpen(false)} to="/contact" className="navbar-item">Contact</Link>
+          <Link onClick={() => setIsOpen(false)} to="/products" className="navbar-item">Products</Link>
         </div>
     </nav>
   );

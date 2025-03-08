@@ -263,6 +263,11 @@ img {
   position: absolute;
 }
 
+.secondary-text{
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
 hr{
   border: var(--border);
   background: transparent;

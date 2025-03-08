@@ -9,6 +9,24 @@ const ProductCard = ({ product }) => {
 
   return (
     <>
+    <div className="product-card-mobile">
+      <div className="product-card-mobile-inner">
+        <div className="image-container">
+          <Link to={`/products/${product._id}`}>
+              <img src={product.images[0]} alt={product.name} />
+          </Link>
+        </div>
+        <div className="product-info-container">
+          <Link className="text-container" to={`/products/${product._id}`}>
+            <h3>{product.name}</h3>
+          </Link>
+          <p className="">₹ {product.price}</p>
+          <p className="secondary-text"> {product.category.name}</p>
+          <button onClick={() => setPopupVisible(true)} className="primary mail-button">
+            Get <i class="ri-mail-line"></i> </button>
+        </div>
+      </div>
+    </div>
       <div key={product._id} className="product-card">
           <img onClick={() => navigate(`/products/${product._id}`)} src={product.images[0]} alt={product.name} />
         <div className="product-card-details">
