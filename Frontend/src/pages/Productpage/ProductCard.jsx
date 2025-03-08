@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import QuotationPopup from "../../utils/popups/QuotationPopup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <div key={product._id} className="product-card">
-        <Link to={`/products/${product._id}`}>
-          <img src={product.images[0]} alt={product.name} />
-        </Link>
+          <img onClick={() => navigate(`/products/${product._id}`)} src={product.images[0]} alt={product.name} />
         <div className="product-card-details">
         <Link to={`/products/${product._id}`}>
           <h3 className="product-title">{product.name}</h3>

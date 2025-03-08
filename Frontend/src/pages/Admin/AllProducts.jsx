@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { ProductContext } from "../../context/ProductContext";
+import { useNavigate } from "react-router-dom";
 
 // const initialProducts = [
 //   {
@@ -165,6 +166,7 @@ const AllProducts = () => {
     fetchProductsAndCategories();
   }, []);
 
+  const navigate = useNavigate();
 
   return (
     <div className="dashboard-body">
@@ -173,7 +175,7 @@ const AllProducts = () => {
       <section className="product-grid">
         {allProducts.map((product, i) => (
           <div key={product._id} className="product-card">
-            <img src={product.images[0]} alt={product.name} />
+            <img onClick={() => navigate(`/products/${product._id}`)} src={product.images[0]} alt={product.name} />
             <div className="product-card-details">
               <h3 className="product-title">{product.name}</h3>
               <div className="price-category">
