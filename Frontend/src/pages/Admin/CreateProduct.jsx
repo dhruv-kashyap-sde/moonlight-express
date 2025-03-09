@@ -9,6 +9,7 @@ const CreateProduct = () => {
     description: "",
     price: "",
     categoryID: "",
+    inStock: true
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -33,10 +34,10 @@ const CreateProduct = () => {
   }, []);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setProduct({
       ...product,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -52,6 +53,7 @@ const CreateProduct = () => {
     formData.append("description", product.description);
     formData.append("price", product.price);
     formData.append("categoryID", product.categoryID);
+    formData.append("inStock", product.inStock);
 
     // Only append image if a new one is selected
     if (selectedImage) {
@@ -126,6 +128,10 @@ const CreateProduct = () => {
               onChange={handleChange}
               className="italic-text"
             />
+            <label style={{ paddingLeft: "10px"}} for="inStock"> 
+            <input style={{width:"auto"}} type="checkbox" id="inStock" name="inStock" onChange={handleChange} checked={product.inStock} />
+              {" "}In stock
+            </label>
             <select
               name="categoryID"
               value={product.categoryID}

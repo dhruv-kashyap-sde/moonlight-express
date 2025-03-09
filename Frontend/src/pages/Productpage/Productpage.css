@@ -219,7 +219,20 @@
   .sorting-filter{
     display: none;
   }
+
+  .out-of-stock{
+    position: absolute;
+    background-color: rgb(202, 31, 31);
+    padding: 5px 10px;
+    border-radius: var(--radius);
+    top: 0px;
+  }
+
   @media (max-width: 768px) {
+    
+  .out-of-stock{
+    font-size: 10px;
+  }
     .product-card {
       display: none;
     }

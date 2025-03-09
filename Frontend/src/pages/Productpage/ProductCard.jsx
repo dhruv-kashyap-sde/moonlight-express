@@ -10,8 +10,10 @@ const ProductCard = ({ product }) => {
   return (
     <>
     <div className="product-card-mobile">
-      <div className="product-card-mobile-inner">
-        <div className="image-container">
+      <div className="product-card-mobile-inner relative">
+        <div className="image-container ">
+        { !product.inStock && <span className="out-of-stock" >Out of Stock</span>}
+
           <Link to={`/products/${product._id}`}>
               <img src={product.images[0]} alt={product.name} />
           </Link>
@@ -27,7 +29,8 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
     </div>
-      <div key={product._id} className="product-card">
+      <div key={product._id} className="product-card relative">
+      { !product.inStock && <span className="out-of-stock" >Out of Stock</span>}
           <img onClick={() => navigate(`/products/${product._id}`)} src={product.images[0]} alt={product.name} />
         <div className="product-card-details">
         <Link to={`/products/${product._id}`}>

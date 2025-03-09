@@ -19,7 +19,9 @@ exports.addProduct = async (req, res) => {
       if (err) {
         return res.status(400).json({ error: err.message });
       }
-      const { name, description, price, categoryID } = req.body;
+      const { name, description, price, categoryID, inStock } = req.body;
+      console.log(inStock);
+      
       
       // Initialize empty variable for image
       let images = [];
@@ -45,6 +47,7 @@ exports.addProduct = async (req, res) => {
         price,
         category: categoryID,
         images: images,
+        inStock
       });
       console.log(images);
       
@@ -71,10 +74,10 @@ exports.getAllProducts = async (req, res) => {
 exports.editProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, price, category, images } = req.body;
+    const { name, description, price, category, images, inStock } = req.body;
     const updatedProduct = await Product.findByIdAndUpdate(
       id,
-      { name, description, price, category, images },
+      { name, description, price, category, images, inStock },
       { new: true, runValidators: true }
     );
     res.status(200).json(updatedProduct);

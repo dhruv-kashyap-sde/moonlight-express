@@ -72,6 +72,7 @@ const AllProducts = () => {
     price: "",
     category: "",
     images: [],
+    inStock: true
   });
 
   const handleEdit = (product) => {
@@ -83,14 +84,17 @@ const AllProducts = () => {
       price: product.price,
       category: product.category._id,
       images: product.images,
+      inStock: product.inStock
     });
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+    console.log(name, value, type, checked);
+    
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -174,7 +178,8 @@ const AllProducts = () => {
       <hr />
       <section className="product-grid">
         {allProducts.map((product, i) => (
-          <div key={product._id} className="product-card">
+          <div key={product._id} className="product-card relative">
+            { !product.inStock && <span className="out-of-stock" >Out of Stock</span>}
             <img onClick={() => navigate(`/products/${product._id}`)} src={product.images[0]} alt={product.name} />
             <div className="product-card-details">
               <h3 className="product-title">{product.name}</h3>
@@ -229,6 +234,10 @@ const AllProducts = () => {
               required
               placeholder="Product Price"
             />
+            <label style={{ paddingLeft: "10px"}} for="inStock"> 
+            <input style={{width:"auto"}} type="checkbox" id="inStock" name="inStock" onChange={handleInputChange} checked={formData.inStock} />
+              {" "}In stock
+            </label>
             <select
               name="category"
               value={formData.category}

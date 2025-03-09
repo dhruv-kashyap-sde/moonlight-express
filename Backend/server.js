@@ -16,7 +16,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 app.use(bodyParser.json());
-app.use(cors({origin: process.env.IP}));
+app.use(cors({origin: `${process.env.IP}`}));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded images
 
 app.use((req, res, next) => {
