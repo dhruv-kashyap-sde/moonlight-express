@@ -233,7 +233,7 @@
   .out-of-stock{
     font-size: 10px;
   }
-    .product-card {
+    .productpage-container .product-card {
       display: none;
     }
   
