@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Navbar.css';
 import Plus from '../svg/Plus';
 import { Link } from 'react-router-dom';
-
+import logo from '../../assets/img/logo.jpg';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${scrolled ? "blur short-navbar relative" : ""}`}>
       <div className="navbar-container">
-        <div className="navbar-logo">Site Logo</div>
+        <div className="navbar-logo"><img src={logo} alt="" /></div>
         <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
           <Link to="/" className="navbar-item">Home</Link>
           <Link to="/about" className="navbar-item">About</Link>

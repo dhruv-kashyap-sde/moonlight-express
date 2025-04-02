@@ -1,8 +1,26 @@
 import React from "react";
 import "./DetailedPopup.css";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const DetailedPopup = ({ inquiry, close }) => {
   const product = inquiry.product || {}; // Fallback to an empty object if product is null
+
+  const handleInquiryDelete = async (id) => {
+    console.log(id);
+    
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL}/delete-inquiry/`, { id }, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      close(); // Close the popup after deletion
+      toast.success("Inquiry deleted successfully");
+    } catch (error) {
+      console.error("Error deleting inquiry", error);
+    }
+  }
 
   return (
     <>
@@ -34,7 +52,10 @@ const DetailedPopup = ({ inquiry, close }) => {
             <p className="client-phone italic-text">{inquiry.phone}</p>
             <p className="client-message italic-text">{inquiry.message}</p>
           </div>
-          <button className="basic-button primary" onClick={close}>Close</button>
+          <div className="basic-button">
+            <button className="primary" onClick={close}>Close</button>
+            <button onClick={() => handleInquiryDelete(inquiry._id)} className="delete"><i className="ri-delete-bin-6-line"></i></button>
+          </div>
         </div>
       </div>
     </>

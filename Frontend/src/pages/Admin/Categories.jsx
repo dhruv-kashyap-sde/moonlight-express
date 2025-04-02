@@ -4,7 +4,7 @@ import Loaders from "../../utils/Loader/Loaders";
 import toast from "react-hot-toast";
 
 const Categories = () => {
-    
+
   const [categories, setCategories] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [loadingCategories, setLoadingCategories] = useState(false);
@@ -80,56 +80,78 @@ const Categories = () => {
     getCategories();
   }, []);
 
+  const handleCategoryDelete = async (id) => {
+    console.log(id);
+    
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/delete-category/`,
+        {id},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      setCategories((prevInquiries) => prevInquiries.filter((inquiry) => inquiry._id !== id));
+      toast.success("Category deleted successfully");
+    } catch (error) {
+      console.error("Error deleting category", error);
+      toast.error("Error deleting category");
+    }
+  }
+
   return (
     <div className="dashboard-body">
       <h1 className="color">Categories</h1>
       <hr />
       <>
-      <div className="categories-container">
-        <div className="category-body">
-          <form onSubmit={createCategories} className="create-category">
-            <h3 className="fw-300">Create a Category</h3>
-            <input
-              value={categoryName}
-              onChange={handleInputChange}
-              name="categoryName"
-              type="text"
-              placeholder="Category Name"
-            />
-            <button disabled={creatingCategories} className="primary">
-              {creatingCategories? " Creating":"Create"}
-            </button>
-          </form>
-          <div className="all-categories">
-            <div className="category-header">
-              <span>
-                Available Categories
-                <button onClick={getCategories} className="secondary">
-                  <i class="ri-reset-right-line"></i>
-                </button>
-              </span>
+        <div className="categories-container">
+          <div className="category-body">
+            <form onSubmit={createCategories} className="create-category">
+              <h3 className="fw-300">Create a Category</h3>
+              <input
+                value={categoryName}
+                onChange={handleInputChange}
+                name="categoryName"
+                type="text"
+                placeholder="Category Name"
+              />
+              <button disabled={creatingCategories} className="primary">
+                {creatingCategories ? " Creating" : "Create"}
+              </button>
+            </form>
+            <div className="all-categories">
+              <div className="category-header">
+                <span>
+                  Available Categories
+                  <button onClick={getCategories} className="secondary">
+                    <i class="ri-reset-right-line"></i>
+                  </button>
+                </span>
+              </div>
+              <hr />
+              <ul>
+                {loadingCategories ? (
+                  <div className="loading-container">
+                    <Loaders />
+                  </div>
+                ) : (
+                  categories.map((category, index) => (
+                    <li key={index}>
+                      {category.name}{" "}
+                      <span className="secondary-text">
+                        {getRealDate(category.createdAt)}
+                        <button onClick={() => handleCategoryDelete(category._id)} className="delete"><i className="ri-delete-bin-6-line"></i></button>
+                      </span>
+                    </li>
+                  ))
+                )}
+              </ul>
             </div>
-            <hr />
-            <ul>
-              {loadingCategories ? (
-                <div className="loading-container">
-                  <Loaders />
-                </div>
-              ) : (
-                categories.map((category, index) => (
-                  <li key={index}>
-                    {category.name}{" "}
-                    <span className="secondary-text">
-                      {getRealDate(category.createdAt)}
-                    </span>
-                  </li>
-                ))
-              )}
-            </ul>
           </div>
         </div>
-      </div>
-    </>
+      </>
     </div>
   );
 };

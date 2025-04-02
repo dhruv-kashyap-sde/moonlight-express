@@ -26,11 +26,6 @@
     color: var(--theme);
     cursor: default;
   }
-  
-  .responsive-table tbody tr:nth-child(even) {
-    background-color: var(--text-dark);
-  }
-  
   /* Hover effect */
   .responsive-table tbody tr:hover {
     background-color: var(--text-dark);
@@ -81,5 +76,32 @@
     .responsive-table td:nth-of-type(4)::before { content: "Phone Number"; }
     .responsive-table td:nth-of-type(5)::before { content: "Message"; }
     .responsive-table td:nth-of-type(6)::before { content: "Product Name"; }
+    .responsive-table td:nth-of-type(7)::before { content: "Action"; }
   }
-  
+
+/* Sort button styles */
+.sort-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.sort-button {
+  padding: 8px 16px;
+  background-color: var(--bg);
+  color: var(--theme);
+  border: var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sort-button:hover {
+  background-color: var(--text-dark);
+}
+
+.sort-button.active {
+  background-color: var(--theme);
+  color: var(--bg);
+}

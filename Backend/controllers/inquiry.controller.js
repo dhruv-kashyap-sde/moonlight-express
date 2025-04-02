@@ -40,3 +40,14 @@ exports.getAllInquiries = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// Delete an inquiry
+exports.deleteInquiry = async (req, res) => {
+  try {
+    const { id } = req.body;
+    await Inquiry.findByIdAndDelete(id);
+    res.status(200).json({ message: "Inquiry deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}

@@ -28,7 +28,7 @@ const Homepage = () => {
           <AboutSection />
         </div>
         <ProductSection />
-        <HowToBuy/>
+        <HowToBuy />
         <ContactSection />
       </div>
     </>
@@ -45,13 +45,10 @@ const AboutSection = () => {
           <img src="path/to/your/image.jpg" alt="Living room" />
         </div>
         <div className="about-text">
-          <h1>WE HAVE UNITED</h1>
+          <h1>WE HAVE WHAT YOU NEED</h1>
           <p>
-            For you and we decided to join forces. For all our clients in
-            Bulgaria, Serbia and Romania, we have created a powerful union of a
-            design studio and a general contractor company rolled into one. Our
-            fit-out team will allow you to forget that you are doing renovation
-            completely.
+            Moonlight Express crafts exquisite handmade products from metal, wood, glass, and resin, bringing artistry and craftsmanship to every creation. With a dedication to quality and unique designs, we offer a diverse collection that seamlessly blends tradition with modern aesthetics. Explore our curated selection and experience the beauty of handcrafted excellence.
+            Let your space shine with Moonlight Express.
           </p>
           <button className="primary">Know more</button>
         </div>
@@ -107,7 +104,7 @@ const ProductSection = () => {
     <>
       <div className="productsection-container">
         <h1>
-          <Dot top={"-10px"} left={"-30px"}/>
+          <Dot top={"-10px"} left={"-30px"} />
           Our Products
         </h1>
         <div className="productsection">
@@ -117,46 +114,46 @@ const ProductSection = () => {
             </div>
           ))}
         </div>
-          <button className="primary"><>More Products...</></button>
+        <button className="primary"><>More Products...</></button>
       </div>
     </>
   );
 };
 
 const HowToBuy = () => {
-  return(
+  return (
     <>
-    <div className="steps-container">
-      <h1 className="relative">How to Buy
-        <PlusGrid bottom={"0"} right={"0"}/>
-      </h1>
-      <div className="steps-body">
-        <div className="step">
-          <p>
-            <Number number={1}/>
-            <i class="action-icon ri-file-search-line"></i>
-            Browse the Desired product from our vast range of collection.
-          </p>
-          <Dot  bottom={"5px"} left={"5px"}/>
-        </div>
-        <div className="step">
-          <p>
-            <Number number={2}/>
-          <i class="action-icon ri-file-edit-line"></i>
-            Fill out neccessary details in the form and get verifried.
-          </p>
-          <Dot  bottom={"5px"} left={"5px"}/>
-        </div>
-        <div className="step">
-          <p>
-            <Number number={3}/>
-            <i class="action-icon ri-truck-line"></i>
-            Get your product delivered to your destination.
-          </p>
-          <Dot  bottom={"5px"} left={"5px"}/>
+      <div className="steps-container">
+        <h1 className="relative">How to Buy
+          <PlusGrid bottom={"0"} right={"0"} />
+        </h1>
+        <div className="steps-body">
+          <div className="step">
+            <p>
+              <Number number={1} />
+              <i class="action-icon ri-file-search-line"></i>
+              Browse the Desired product from our vast range of collection.
+            </p>
+            <Dot bottom={"5px"} left={"5px"} />
+          </div>
+          <div className="step">
+            <p>
+              <Number number={2} />
+              <i class="action-icon ri-file-edit-line"></i>
+              Fill out neccessary details in the form and get verifried.
+            </p>
+            <Dot bottom={"5px"} left={"5px"} />
+          </div>
+          <div className="step">
+            <p>
+              <Number number={3} />
+              <i class="action-icon ri-truck-line"></i>
+              Get your product delivered to your destination.
+            </p>
+            <Dot bottom={"5px"} left={"5px"} />
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

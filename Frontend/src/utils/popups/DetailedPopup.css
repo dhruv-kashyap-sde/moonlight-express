@@ -105,7 +105,8 @@
     position: absolute;
     bottom: 16px;
     right: 16px;
-    
+    display: flex;
+    gap: 10px;
   }
   
   @media (max-width: 768px) {
