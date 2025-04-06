@@ -1,35 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const adminController = require("../controllers/admin.controller");
-const jwt = require("jsonwebtoken");
+const verifyToken = require("../middlewares/verifyToken");
+const cors = require('cors');
 
-// Middleware to verify token
-const verifyToken = (req, res, next) => {
-   try {
-     const token = req.body.token;
-     if (!token) return res.status(401).json({ message: "Unauthorized" });
-   
-     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
-       if (err) return res.status(403).json({ message: "Invalid Token" });
-       console.log(decoded);
-       req.user = decoded;
-       next();
-     });
-   } catch (error) {
-    res.status(401).json({error: error.message});
-   }
-  };
+// Configure CORS for admin routes
+const adminCorsOptions = {
+  origin: ["https://moonlight-express.onrender.com", "http://localhost:5173"],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+};
 
 // **Login Route**
-router.post("/admin/login", adminController.login);
+router.post("/admin/login", cors(adminCorsOptions), adminController.login);
 
 // **Logout Route**
 router.post("/admin/logout", adminController.logout);
 
 // **Protected Admin Route**
-router.post("/admin/dashboard", verifyToken, adminController.dashboard);
-
-//create an admin
-// router.post('/admin', adminController.createAdmin);
+router.get("/admin/dashboard", verifyToken, adminController.dashboard);
 
 module.exports = router;

@@ -6,6 +6,7 @@
 }
 .sidebar-container {
   min-height: 100vh;
+  max-height: 100vh;
   min-width: 100px;
   width: 20%;
   border: var(--border);
@@ -28,15 +29,6 @@
   gap: 10px;
 }
 
-.sidebar-container .logout-button{
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  width: 90%;
-}
-.logout-button .secondary{
-  width: 100%;
-}
 /* dashboard-body */
 
 .dashboard-body {
@@ -118,15 +110,6 @@
   width: 500px;
   max-width: 100%;
 }
-/* 
-.modal-content input,
-.modal-content textarea {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-} */
 
 .modal-content button {
   margin-right: 10px;
@@ -134,4 +117,22 @@
 
 .editable-input{
   min-height: 150px;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+    margin-top: 5vh;
+  }
+  .sidebar-container {
+    width: 100%;
+    min-width: 100%;
+    margin-bottom: 20px;
+    min-height: auto;
+    height: fit-content;
+  }
+  .dashboard-body {
+    width: 100%;
+    min-width: 100%;
+  } 
 }

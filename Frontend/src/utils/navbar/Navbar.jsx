@@ -19,7 +19,7 @@ const Navbar = () => {
 
 
   return (
-    <nav className={`navbar ${scrolled ? "blur short-navbar relative" : ""}`}>
+    <nav className={`navbar ${scrolled && !isOpen? "blur short-navbar relative" : ""}`}>
       <div className="navbar-container">
         <div className="navbar-logo"><img src={logo} alt="" /></div>
         <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
@@ -29,15 +29,25 @@ const Navbar = () => {
           <Link to="/products" className="navbar-item">Products</Link>
         </div>
         <div className="navbar-toggle" onClick={() => setIsOpen(!isOpen)}>
-          <span className="navbar-toggle-icon"><i class="ri-menu-line"></i></span>
+          <span className="navbar-toggle-icon"><i className="ri-menu-line"></i></span>
         </div>
       </div>
-        <div className={`hidden ${isOpen && 'hamburger-menu '} ${!scrolled && "blur"}`}>
+
+      {/* Mobile sidebar menu */}
+      <div className={`sidebar-menu blur ${isOpen ? 'open' : ''}`}>
+        <div className="sidebar-menu-close" onClick={() => setIsOpen(false)}>
+          <i className="ri-close-line"></i>
+        </div>
+        <div className="sidebar-menu-items">
           <Link onClick={() => setIsOpen(false)} to="/" className="navbar-item">Home</Link>
           <Link onClick={() => setIsOpen(false)} to="/about" className="navbar-item">About</Link>
           <Link onClick={() => setIsOpen(false)} to="/contact" className="navbar-item">Contact</Link>
           <Link onClick={() => setIsOpen(false)} to="/products" className="navbar-item">Products</Link>
         </div>
+      </div>
+      
+      {/* Overlay for when sidebar is open */}
+      <div className={`sidebar-overlay ${isOpen ? 'show' : ''}`} onClick={() => setIsOpen(false)}></div>
     </nav>
   );
 }

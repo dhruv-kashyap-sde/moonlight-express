@@ -1,50 +1,74 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import Loaders from "../Loader/Loaders";
 
 const Private = () => {
   const [loading, setLoading] = useState(true);
   const [hasAccess, setHasAccess] = useState(false);
-  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
+    let isMounted = true;
     const URL = import.meta.env.VITE_API_URL;
 
     const requestAccess = async () => {
       try {
-        const response = await axios.post(`${URL}/admin/dashboard`, { token });
-        console.log(response.data);
+        if (isMounted) {
+          setLoading(true);
+        }
 
-        if (response.data.success) {
+        // Ensure route matches the backend endpoint exactly
+        const response = await axios.get(`${URL}/admin/dashboard`, {
+          withCredentials: true,
+        });
+
+        if (isMounted && response.data.success) {
           setHasAccess(true);
-        } else {
-          setHasAccess(false);
-          toast.error("Access denied");
         }
       } catch (error) {
-        console.log("error login failed");
-        toast.error("error login failed");
-        setHasAccess(false);
+        if (isMounted) {
+          console.error("Authentication error:", error.message);
+
+          // More specific error messages based on error type
+          if (error.response?.status === 401) {
+            toast.error("Your session has expired. Please login again.");
+          } else if (error.response?.status === 403) {
+            toast.error("You don't have permission to access this area.");
+          } else if (error.response?.status === 404) {
+            toast.error("Server endpoint not found. Please contact an administrator.");
+            console.error("Route mismatch detected: Check that frontend and backend routes are aligned.");
+          } else {
+            toast.error("Authentication failed. Please try again later.");
+          }
+          setHasAccess(false);
+
+          // Redirect to login on auth failure
+          navigate("/login", { replace: true });
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
-    if (token) {
-      requestAccess();
-    } else {
-      setLoading(false);
-      setHasAccess(false);
-    }
-  }, [token]);
+    requestAccess();
 
+    // Cleanup function to prevent state updates on unmounted component
+    return () => {
+      isMounted = false;
+    };
+  }, [navigate]);
+
+  // Show a proper loading component
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loaders />;
   }
 
-  if (!token || !hasAccess) {
-    return <Navigate to="/login" />;
+  if (!hasAccess) {
+    return <Navigate to="/login" replace />;
   }
 
   return <Outlet />;
