@@ -30,8 +30,6 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET_KEY,
       { 
         expiresIn: '1h',
-        audience: 'moonlight-express-admin',
-        issuer: 'moonlight-express-api'
       }
     );
 
@@ -39,7 +37,6 @@ exports.login = async (req, res) => {
     res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
       maxAge: 3600000, // 1 hour
       path: '/'
     });

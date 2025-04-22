@@ -49,8 +49,9 @@ app.use('/api/admin/login', loginLimiter);
 app.use('/api', apiLimiter);
 
 // CORS configuration - improved to handle preflight requests properly
+const allowedOrigins = ["https://moonlight-express.onrender.com", "http://localhost:5173"];
 app.use(cors({
-  origin: ["https://moonlight-express.onrender.com", "http://localhost:5173"],
+  origin: allowedOrigins,
   credentials: true, // Allow cookies to be sent with requests
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
@@ -67,7 +68,10 @@ app.use((err, req, res, next) => {
 });
 
 // Add OPTIONS response for preflight requests
-app.options('*', cors());
+app.options('*', cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+}));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded images
 
