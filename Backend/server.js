@@ -14,6 +14,7 @@ const path = require('path');
 const PORT = process.env.PORT || 5000;
 
 const dotenv = require('dotenv');
+const { access } = require('fs');
 dotenv.config();
 
 // Body parser middleware
@@ -48,9 +49,8 @@ app.use('/api/admin/login', loginLimiter);
 app.use('/api', apiLimiter);
 
 // CORS configuration - improved to handle preflight requests properly
-const allowedOrigins = ["https://moonlight-express.onrender.com", "http://localhost:5173"];
 app.use(cors({
-  origin: allowedOrigins,
+  origin: ["https://moonlight-express.onrender.com", "http://localhost:5173"],
   credentials: true, // Allow cookies to be sent with requests
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
