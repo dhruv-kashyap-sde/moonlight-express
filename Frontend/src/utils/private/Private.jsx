@@ -23,11 +23,14 @@ const Private = () => {
         const response = await axios.get(`${URL}/admin/dashboard`, {
           withCredentials: true,
         });
-
+        console.log("siccesfful login",response.data);
+        
         if (isMounted && response.data.success) {
           setHasAccess(true);
         }
       } catch (error) {
+        console.log("error when no login", error);
+        
         if (isMounted) {
           console.error("Authentication error:", error.message);
 
