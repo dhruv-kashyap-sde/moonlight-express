@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Security middleware
-app.use(helmet()); // Adds various HTTP headers for security
+// app.use(helmet()); // Adds various HTTP headers for security
 
 // Enhanced rate limiting
 const apiLimiter = rateLimit({
@@ -43,10 +43,10 @@ const loginLimiter = rateLimit({
   legacyHeaders: false
 });
 
-// Apply rate limiter to login route
-app.use('/api/admin/login', loginLimiter);
-// Apply general rate limiting to all API routes
-app.use('/api', apiLimiter);
+// // Apply rate limiter to login route
+// app.use('/api/admin/login', loginLimiter);
+// // Apply general rate limiting to all API routes
+// app.use('/api', apiLimiter);
 
 // CORS configuration - improved to handle preflight requests properly
 const allowedOrigins = ["https://moonlight-express.onrender.com", "http://localhost:5173"];
@@ -54,24 +54,23 @@ app.use(cors({
   origin: allowedOrigins,
   credentials: true, // Allow cookies to be sent with requests
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
-// Handle CORS errors
-app.use((err, req, res, next) => {
-  if (err.message === 'Not allowed by CORS') {
-    return res.status(403).json({
-      message: 'CORS not allowed for this origin'
-    });
-  }
-  next(err);
-});
+// // Handle CORS errors
+// app.use((err, req, res, next) => {
+//   if (err.message === 'Not allowed by CORS') {
+//     return res.status(403).json({
+//       message: 'CORS not allowed for this origin'
+//     });
+//   }
+//   next(err);
+// });
 
-// Add OPTIONS response for preflight requests
-app.options('*', cors({
-  origin: allowedOrigins,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-}));
+// // Add OPTIONS response for preflight requests
+// app.options('*', cors({
+//   origin: allowedOrigins,
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+// }));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded images
 

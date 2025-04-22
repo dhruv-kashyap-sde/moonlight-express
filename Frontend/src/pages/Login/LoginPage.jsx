@@ -17,7 +17,7 @@ const Loginpage = () => {
     const checkAuthStatus = async () => {
       try {
         // Since cookie is automatically sent, we just need to check if we're authenticated
-        const response = await axios.post(`${URL}/admin/dashboard`, {}, {
+        const response = await axios.get(`${URL}/admin/dashboard`, {
           withCredentials: true // Important for sending cookies
         });
         

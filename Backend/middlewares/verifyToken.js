@@ -10,13 +10,12 @@ module.exports = (req, res, next) => {
     }
     
     // Verify the token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY, {
-      audience: 'moonlight-express-admin',
-      issuer: 'moonlight-express-api'
-    });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     
     // Add user info to request
     req.user = decoded;
+    console.log("decoded", decoded);
+    
     next();
   } catch (error) {
     console.error('Token verification error:', error);
