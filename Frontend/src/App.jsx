@@ -9,11 +9,13 @@ import Loginpage from "./pages/Login/LoginPage";
 import { Toaster } from "react-hot-toast";
 import SingleProduct from "./pages/Productpage/SingleProduct";
 import Private from "./utils/private/Private";
+import ScrollToTop from "./utils/ScrollToTop";
 
 const App = () => {
   return (
     <>
       <Router>
+        <ScrollToTop/>
         <Navbar />
         <Routes>
           <Route path="/" element={<Homepage />} />

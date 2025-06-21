@@ -1,5 +1,5 @@
 const express = require('express');
-const { addProduct, getAllProducts, editProduct, deleteProduct, getProductById } = require('../controllers/product.controller');
+const { addProduct, getAllProducts, editProduct, deleteProduct, getProductById, getProductsForHomepage } = require('../controllers/product.controller');
 const router = express.Router();
 
 // Add a product with file upload
@@ -16,6 +16,9 @@ router.delete('/products/:id', deleteProduct);
 
 //get a single product through its id
 router.get('/products/:id', getProductById);
+
+//get a single product through its id
+router.get('/home/products', getProductsForHomepage);
 
 // Other routes...
 

@@ -135,3 +135,17 @@ exports.getProductById = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+
+//get all products in homepage
+exports.getProductsForHomepage = async (req, res) => {
+  try {
+    const products = await Product.find().populate("category", "name").limit(20);
+    if (!products || products.length === 0) {
+      return res.status(404).json({ message: "No products found" });
+    }
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

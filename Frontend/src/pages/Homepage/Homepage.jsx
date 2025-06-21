@@ -1,11 +1,13 @@
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import "./Homepage.css";
-import img from "../../assets/img/bg-image.jpg";
-import Plus from "../../utils/svg/Plus";
 import PlusGrid from "../../utils/svg/PlusGrid";
 import Dot from "../../utils/svg/Dot";
 import Number from "../../utils/svg/Number";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Homepage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="homepage-container">
@@ -17,9 +19,9 @@ const Homepage = () => {
             />
             <div className="overlay">
               <div className="herosection-content">
-                <h1 className="herosection-title">Moonlight Express</h1>
-                <p>Lorem ipsum dolor sit amet consectetur.</p>
-                <button className="primary">Explore Now</button>
+                <h1 className="herosection-title mb-10">Moonlight Express</h1>
+                <p className="mb-10">Handmade designs and products.</p>
+                <button onClick={() => navigate("/products")} className="primary">Explore Now</button>
               </div>
             </div>
           </div>
@@ -59,62 +61,37 @@ const AboutSection = () => {
 };
 
 const ProductSection = () => {
-  const products = [
-    {
-      link: "https://images.unsplash.com/photo-1672252508024-c80ac06f960c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1527383214149-cb7be04ae387?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1602607203588-d6d0eda790e3?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1657603513821-399e205022cd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1396&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1612188842101-f976582906fc?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1570569962804-5377da5be035?q=80&w=1507&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1585386931415-464367473a01?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1633101635884-93a9992960fa?q=80&w=1393&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1551806235-6692cbfc690b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1604145499880-4842c12ad53f?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1622723165944-2130128778d2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      link: "https://images.unsplash.com/photo-1536437075651-01d675529a6b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    getAllProducts();
+  }, [])
+  const URL = import.meta.env.VITE_API_URL;
+  const getAllProducts = async () => {
+    try {
+      const response = await axios.get(`${URL}/home/products`);
+      setProducts(response.data);
+      
+    } catch (error) {
+      console.error("Error fetching products:", error);     
+      
+    }
+  }
   return (
     <>
       <div className="productsection-container">
-        <h1>
+        <h1 style={{marginBottom:"50px"}}>
           <Dot top={"-10px"} left={"-30px"} />
           Our Products
         </h1>
         <div className="productsection">
           {products.map((product, index) => (
             <div key={index} className="product">
-              <img src={`${product.link}`} alt="" />
+              <img src={`${product.images[0]}`} alt="" />
             </div>
           ))}
         </div>
-        <button className="primary"><>More Products...</></button>
+        <button onClick={() => navigate("/products")} className="primary"><>More Products...</></button>
       </div>
     </>
   );
@@ -140,7 +117,7 @@ const HowToBuy = () => {
             <p>
               <Number number={2} />
               <i class="action-icon ri-file-edit-line"></i>
-              Fill out neccessary details in the form and get verifried.
+              Fill out neccessary details in the form and get verified.
             </p>
             <Dot bottom={"5px"} left={"5px"} />
           </div>
